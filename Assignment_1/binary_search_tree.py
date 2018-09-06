@@ -16,7 +16,43 @@ class Node:
         self.addLeftSubtree(lNode)
         self.addRightSubtree(rNode)
 ## END-DO NOT EDIT
+        
+## Your answer here (expected length: 12 lines)
+def Binary_Tree_Height(rootNode):
+     if rootNode == None:
+        return -1
+     else:
+        return 1 + max(Binary_Tree_Height(rootNode.right),Binary_Tree_Height(rootNode.left))
 
+def S(h):
+    if h == 0:
+        return 0
+    return 2 * S(h-1) + h
+
+def Height_summation(rootNode):
+    if rootNode == None:
+        return 0
+    if (rootNode.left == None) & (rootNode.right == None):
+        return 0
+    if rootNode.right == None:
+        hl = 0
+    else:
+        hl = Height_summation(rootNode.left)
+    if rootNode.right == None:
+        hr = 0
+    else:
+        hr = Height_summation(rootNode.right)
+    return hl+hr+max(hl,hr)+1
+    
+def S_expansion(h):
+    sum=0
+    counter = 1
+    while(h!=0):
+        sum = 2 * sum + counter
+        counter = counter + 1
+        h = h - 1
+    return sum
+   
 ## IMPLEMENT YOUR CODE HERE.
 ## Expected Size 20 lines or less.
 def isBinarySearchTree(rootNode):
@@ -93,6 +129,8 @@ node11.addSubtree(None, node12)
 node12.addSubtree(node13, node14)
 
 rootNode4 = node11
+
+
 
 try:
     assert isBinarySearchTree(rootNode1), 'Test 1 Failed: expected answer True, your answer False'
