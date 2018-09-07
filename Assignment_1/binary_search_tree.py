@@ -30,6 +30,7 @@ def S(h):
     return 2 * S(h-1) + h
 
 def Height_summation(rootNode):
+    n.key = n.key + 1
     if rootNode == None:
         return 0
     if (rootNode.left == None) & (rootNode.right == None):
@@ -130,7 +131,55 @@ node12.addSubtree(node13, node14)
 
 rootNode4 = node11
 
+#Tree number 5
+A = Node(1)
+B = Node(2)
+C = Node(3)
+D = Node(4)
+E = Node(5)
+F = Node(6)
+G = Node(7)
+B.addSubtree(A, C)
+F.addSubtree(E, G)
+D.addSubtree(B, F)
+A1 = Node(11)
+B1 = Node(21)
+C1 = Node(31)
+D1 = Node(41)
+E1 = Node(51)
+F1 = Node(61)
+G1 = Node(71)
+B1.addSubtree(A1, C1)
+F1.addSubtree(E1, G1)
+D1.addSubtree(B1, F1)
+A2 = Node(111)
+B2 = Node(121)
+C2 = Node(131)
+D2 = Node(141)
+E2 = Node(151)
+F2 = Node(161)
+G2 = Node(171)
+B2.addSubtree(A2, C2)
+F2.addSubtree(E2, G2)
+D2.addSubtree(B2, F2)
+A3 = Node(211)
+B3 = Node(221)
+C3 = Node(231)
+D3 = Node(241)
+E3 = Node(251)
+F3 = Node(261)
+G3 = Node(271)
+B3.addSubtree(A3, C3)
+F3.addSubtree(E3, G3)
+D3.addSubtree(B3, F3)
+K = Node(10)
+L = Node(200)
+M = Node(100)
+K.addSubtree(D, D1)
+L.addSubtree(D2, D3)
+M.addSubtree(K, L)
 
+n= Node(0)
 
 try:
     assert isBinarySearchTree(rootNode1), 'Test 1 Failed: expected answer True, your answer False'
@@ -141,7 +190,38 @@ try:
     print('Test 3 Passed!')
     assert not isBinarySearchTree(rootNode4), 'Test 3 Failed: expected answer False, your answer True'
     print('Test 4 Passed!')
-    
+    print(Binary_Tree_Height(rootNode1))
+    print(Height_summation(rootNode1))
+    print(n.key,"\n")
+    n.key=0
+    print(Binary_Tree_Height(rootNode2))
+    print(Height_summation(rootNode2))
+    print(n.key,"\n")
+    n.key=0
+    print(Binary_Tree_Height(rootNode3))
+    print(Height_summation(rootNode3))
+    print(n.key,"\n")
+    n.key=0
+    print(Binary_Tree_Height(rootNode4))
+    print(Height_summation(rootNode4))
+    print(n.key,"\n")
+    n.key=0
+    print(Binary_Tree_Height(D))
+    print(Height_summation(D))
+    print(n.key,"\n")
+    n.key=0
+    print(Binary_Tree_Height(K))
+    print(Height_summation(K))
+    print(n.key,"\n")
+    n.key=0
+    print(Binary_Tree_Height(M))
+    print(Height_summation(M))
+    print(n.key,"\n")
+    n.key=0
+    print(Binary_Tree_Height(B))
+    print(Height_summation(B))
+    print(n.key,"\n")
+    n.key=0
 except NotImplementedError:
     print('Nothing Implemented Yet. ')
 
