@@ -1,6 +1,7 @@
 from scramble_support import *
 
 if __name__ == "__main__":
+    words=[]
     while(1):
         raw_input = input("Enter next word ")
         numbers = re.findall(r'\d',raw_input)
@@ -18,8 +19,12 @@ if __name__ == "__main__":
             if len(letters) > max_letters:
                 print("Too many letters. Maximum letters limit =",max_letters)
                 continue
-            sort_letters(letters)
-            word_search(letters)
+            if vowels_present(letters):
+                sort_letters(letters)
+                words=word_search(letters)
+            else:
+                print("No vowels present in the letters = ",letters)
+                continue
         else:
                 if len(letters)+1 > max_letters:
                     print("Too many letters. Maximum letters limit =",max_letters)
@@ -27,6 +32,13 @@ if __name__ == "__main__":
                 for wild in points_for:
                     wild_letters = letters.copy()
                     wild_letters.append(wild)
-                    sort_letters(wild_letters)
-                    word_search(wild_letters)
-        
+                    if vowels_present(wild_letters):
+                        sort_letters(wild_letters)
+                        words=word_search(wild_letters)
+                        if words != []:
+                            print("words found = ",words)
+                            break
+        if words != []:
+            print("Word with maximum score is ", words," with a score of ",get_word_score(words));
+        else:
+            print("No word can be made with the letters ",letters)
