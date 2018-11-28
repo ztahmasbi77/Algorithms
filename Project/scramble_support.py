@@ -1,8 +1,9 @@
 from File_operations import *
 from Number_operations import *
+from Trie_operations import *
 from random import choice
 import re
-digits_regex="[0123456789]"
+
 max_letters=10
 
 def vowels_present(letters):
