@@ -1,9 +1,9 @@
 from scramble_support import *
 
 if __name__ == "__main__":
-    words=[]
     while(1):
-        raw_input = input("Enter next word ")
+        words=[]
+        raw_input = input("\nEnter next set of letters, a number 'n' for 'n' random letters and '?' for a wildcard.")
         numbers = re.findall(r'\d',raw_input)
         wildcard = re.findall(r'\?',raw_input)
         letters = re.sub(r'[\d\?]+', '', raw_input)
@@ -39,6 +39,12 @@ if __name__ == "__main__":
                             print("words found = ",words)
                             break
         if words != []:
-            print("Word with maximum score is ", words," with a score of ",get_word_score(words));
+            print("For letters = ",letters)
+            print("\nWord with maximum score is ", words[0], " with score of ", get_word_score(words[0]))
+            words_found = len(words)
+            if words_found > 1:
+                print("\nOther words are:")
+                for i in range(1,words_found):
+                    print("\n",words[i]," with a score of ", get_word_score(words[i]))
         else:
             print("No word can be made with the letters ",letters)
