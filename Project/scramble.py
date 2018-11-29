@@ -2,7 +2,9 @@ from scramble_support import *
 
 if __name__ == "__main__":
     while(1):
+        print("\n**************************************************\n")
         words=[]
+        many_letters = False
         raw_input = input("\nEnter next set of letters, a number 'n' for 'n' random letters and '?' for a wildcard.")
         numbers = re.findall(r'\d',raw_input)
         wildcard = re.findall(r'\?',raw_input)
@@ -17,8 +19,7 @@ if __name__ == "__main__":
             random_letters(letters,int(i))
         if wildcard == []:
             if len(letters) > max_letters:
-                print("Too many letters. Maximum letters limit =",max_letters)
-                continue
+                many_letters = True
             if vowels_present(letters):
                 sort_letters(letters)
                 word_search(words,letters)
@@ -26,16 +27,18 @@ if __name__ == "__main__":
                 print("No vowels present in the letters = ",letters)
                 continue
         else:
-                if len(letters)+1 > max_letters:
-                    print("Too many letters. Maximum letters limit =",max_letters)
-                    continue
+                if len(letters) > max_letters:
+                    many_letters = True
                 for wild in points_for:
                     wild_letters = letters.copy()
                     wild_letters.append(wild)
                     if vowels_present(wild_letters):
                         sort_letters(wild_letters)
                         word_search(words,wild_letters)
+                        if (many_letters) & (len(words)>0):
+                            break
         if words != []:
+            sort_words(words)
             print("For letters = ",letters)
             print("\nWord with maximum score is ", words[0], " with score of ", get_word_score(words[0]))
             words_found = len(words)

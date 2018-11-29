@@ -3,7 +3,8 @@ from Number_operations import *
 from random import choice
 import re
 
-max_letters=20
+max_letters=10
+many_letters = False
 
 class Trie:
 
@@ -91,6 +92,45 @@ def sort_letters(data):
                     data[j],data[j+1] = data[j+1],data[j]
     return
 
+def sort_words(data):
+    n = len(data)
+    if n == 1:
+        return data
+    elif n == 2:
+        if get_word_score(data[0]) < get_word_score(data[1]):
+            data[0],data[1] = data[1],data[0]
+        return data
+    else:
+        data_1 = sort_words(data[:int(n/2)])
+        data_2 = sort_words(data[int(n/2):])
+        n_1 = len(data_1)
+        n_2 = len(data_2)
+        counter_1=0
+        counter_2=0
+        counter_merge=0
+        while(counter_1 < n_1 or counter_2 < n_2):
+            if counter_1 < n_1 and counter_2 < n_2:
+                if get_word_score(data_1[counter_1]) > get_word_score(data_2[counter_2]):
+                    data[counter_merge] = data_1[counter_1]
+                    counter_1 += 1
+                else:
+                    data[counter_merge] = data_2[counter_2]
+                    counter_2 += 1
+            elif counter_1 < n_1:
+                data[counter_merge] = data_1[counter_1]
+                counter_1 += 1
+            else:
+                data[counter_merge] = data_2[counter_2]
+                counter_2 += 1
+            counter_merge += 1
+        return data
+
+def list_checker(needle,haystack):
+    for hay in haystack:
+        if needle == hay:
+            return True
+    return False
+
 def word_adder(word):
     path=list(word)
     sort_letters(path)
@@ -115,11 +155,11 @@ def word_search(words,letters):
             if vowels_present(element):
                 temp=root.check_data(element)
                 if temp != None:
-                    words.append(temp)
-                    break
+                    if not list_checker(temp,words):
+                        words.append(temp)
+                if (many_letters) & (len(words)>0):
+                    return words
                 #print("path = ",element)
-            if words != []:
-                break
     return words
 
 def create_trie(file_name):
@@ -131,7 +171,7 @@ def create_trie(file_name):
            #print("word = ",word)
            word = fptr.readline().rstrip()    
 
-create_trie("wordlist")
+create_trie("wordlist.txt")
       
 if __name__ == "__main__":
     data=[]
