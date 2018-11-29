@@ -21,7 +21,7 @@ if __name__ == "__main__":
                 continue
             if vowels_present(letters):
                 sort_letters(letters)
-                words=word_search(letters)
+                word_search(words,letters)
             else:
                 print("No vowels present in the letters = ",letters)
                 continue
@@ -34,10 +34,7 @@ if __name__ == "__main__":
                     wild_letters.append(wild)
                     if vowels_present(wild_letters):
                         sort_letters(wild_letters)
-                        words=word_search(wild_letters)
-                        if words != []:
-                            print("words found = ",words)
-                            break
+                        word_search(words,wild_letters)
         if words != []:
             print("For letters = ",letters)
             print("\nWord with maximum score is ", words[0], " with score of ", get_word_score(words[0]))

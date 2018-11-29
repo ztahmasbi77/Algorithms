@@ -106,9 +106,8 @@ def random_letters(letters,n):
         letters.append(choice('abcdefghijklmnopqrstuvwxyz'))
     return 
 
-def word_search(letters):
+def word_search(words,letters):
     #print("letters to be searched",letters)
-    words=[]
     groups=[]
     for i in range(len(letters),0,-1):
         groups=group_generator(letters,i)
