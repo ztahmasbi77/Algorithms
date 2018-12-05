@@ -3,9 +3,6 @@ from Number_operations import *
 from random import choice
 import re
 
-max_letters=10
-many_letters = False
-
 class Trie:
 
     def __init__(self,letter_value = None):
@@ -146,7 +143,7 @@ def random_letters(letters,n):
         letters.append(choice('abcdefghijklmnopqrstuvwxyz'))
     return 
 
-def word_search(words,letters):
+def word_search(words,letters,many_letters):
     #print("letters to be searched",letters)
     groups=[]
     for i in range(len(letters),0,-1):
@@ -157,7 +154,7 @@ def word_search(words,letters):
                 if temp != None:
                     if not list_checker(temp,words):
                         words.append(temp)
-                if (many_letters) & (len(words)>0):
+                if ( many_letters ) & (words != []):
                     return words
                 #print("path = ",element)
     return words
